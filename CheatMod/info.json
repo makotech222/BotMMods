@@ -1,0 +1,11 @@
+{
+  "Id": "CheatMod",
+  "DisplayName": "Cheat Mod",
+  "Author": "makotech222",
+  "Version": "1.0.0",
+  "ManagerVersion": "0.21.2",
+  "GameVersion": "1.0.0",
+  "Requirements": [],
+  "AssemblyName": "CheatMod.dll",
+  "EntryMethod": "BotM.Main.Load"
+}
