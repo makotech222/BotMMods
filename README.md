@@ -2,7 +2,8 @@
 
 UnityModManager 0.21.2 supported; Add the following to the UnityModManagerConfig.xml:
 
-```</GameInfo>
+```
+</GameInfo>
 <GameInfo Name="Banner of the Maid">
 <Folder>Banner of the Maid</Folder>
 <ModsDirectory>Mods</ModsDirectory>
@@ -10,7 +11,8 @@ UnityModManager 0.21.2 supported; Add the following to the UnityModManagerConfig
 <GameExe>banner.exe</GameExe>
 <EntryPoint>[UnityEngine.UI.dll]UnityEngine.EventSystems.EventSystem.cctor:After</EntryPoint>
 <StartingPoint>[Assembly-CSharp.dll]Game.Client.UITitleMenu.Awake:Before</StartingPoint>
-</GameInfo>```
+</GameInfo>
+```
 
 Download and Install the CheatMod.zip file from the git repo. Use the Unity Mod Manager UI to change settings
 
