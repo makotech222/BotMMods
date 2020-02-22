@@ -24,3 +24,5 @@ CheatMod:
 - Inf Weapon Usage
 - No classup token usage
 - No Learn Skill token usage
+- Min. Movement range
+- Always Dodge
