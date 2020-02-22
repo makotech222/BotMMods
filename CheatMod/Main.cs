@@ -8,6 +8,9 @@ using System.IO;
 using France.Game.model.level;
 using France.Resource;
 using France.Game.model;
+using France.Game.controller;
+using France.Game;
+using System;
 
 namespace BotM
 {
@@ -159,6 +162,36 @@ namespace BotM
                 __instance.luck = localState[6];
             }
         }
+
+        [HarmonyPatch(typeof(GFightUnit))]
+        [HarmonyPatch("getBuffMovePower")]
+        class getBuffMovePower
+        {
+
+            static void Postfix(GFightUnit __instance, ref int __result)
+            {
+                bool isEnemyMark = __instance.getTeamId() == 1;
+                if (_settings.MovementRangeValue > 0 && !isEnemyMark)
+                {
+                    __result = Math.Max(__result, _settings.MovementRangeValue);
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(GFightUnit))]
+        [HarmonyPatch("calcDodge")]
+        class calcDodge
+        {
+
+            static void Postfix(GFightUnit __instance, GFightUnit attacker, bool isSimulate, ref float __result)
+            {
+                bool isEnemyAttacker = attacker.getTeamId() == 1;
+                if (_settings.AlwaysDodge && isEnemyAttacker && !isSimulate)
+                {
+                    __result = 1000.0f;
+                }
+            }
+        }
     }
 
     public class Settings : UnityModManager.ModSettings, IDrawable
@@ -188,6 +221,12 @@ namespace BotM
         [Draw("Infinite Weapon Usage")] public bool InfWeaponUsage = false;
         [Draw("Infinite Credits to Buy Skills")] public bool InfSkillBuy = false;
         [Draw("Infinite Credits to Promote")] public bool InfPromoteBuy = false;
+
+        [Header("Combat Mod (Player Only)")]
+        [Draw("Min Movement Range", Precision = 0, Min = 0)] 
+        public int MovementRangeValue = 0;
+        [Draw("Always Dodge")]
+        public bool AlwaysDodge = false;
 
         public override void Save(UnityModManager.ModEntry modEntry)
         {
